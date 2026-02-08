@@ -1,11 +1,12 @@
 from django.http import JsonResponse
 from django.views.decorators.cache import cache_page
 from .models import Property
+from .utils import get_all_properties
 
 @cache_page(60 * 15)
 def property_list(request):
     # Fetch all properties
-    properties = Property.objects.all()
+    properties = get_all_properties()
     
     # Prepare data for JsonResponse
     data = [
